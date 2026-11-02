@@ -1,0 +1,14 @@
+{
+  "name": "mesa-de-cartas",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel src/index.html --open",
+    "build": "parcel build src/index.html --public-url ./",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4",
+    "typescript": "^7.0.2"
+  }
+}

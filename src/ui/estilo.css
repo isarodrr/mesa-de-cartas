@@ -1,0 +1,423 @@
+:root {
+  --feltro-claro: #12805a;
+  --feltro-escuro: #0a4a35;
+  --madeira: #2b1d14;
+  --ouro: #f2c94c;
+  --papel: #fffdf6;
+  --texto: #f6f1e4;
+  --vermelho: #c62828;
+  --preto: #1d1d1f;
+  --painel: rgba(8, 20, 16, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px;
+  color: var(--texto);
+  font-variant-emoji: text;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 0%, #3a2a1e, var(--madeira) 70%);
+}
+
+.topo {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.topo h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.6rem;
+  letter-spacing: 1px;
+  color: var(--ouro);
+}
+
+.topo p {
+  margin: 4px 0 0;
+  opacity: 0.85;
+}
+
+.aviso {
+  max-width: 720px;
+  margin: 24px auto;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: #5b1f1f;
+  border: 1px solid #ff8a80;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.mesa {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-template-areas:
+    "feltro painel"
+    "controles controles";
+  gap: 20px;
+}
+
+.feltro {
+  grid-area: feltro;
+  padding: 24px;
+  border-radius: 28px;
+  border: 10px solid #5a3b25;
+  background: radial-gradient(ellipse at center, var(--feltro-claro), var(--feltro-escuro));
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.45), 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- monte e descarte ---------- */
+
+.pilhas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.pilha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.rotulo {
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.qtd {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 118px;
+}
+
+.slot .vazio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 118px;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.resultado {
+  flex-basis: 100%;
+  margin: 0;
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #3a2b00;
+  background: linear-gradient(180deg, #ffe082, var(--ouro));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- jogadores ---------- */
+
+.assentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.assento {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 230px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--painel);
+  border: 2px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.assento.vencedor {
+  border-color: var(--ouro);
+  box-shadow: 0 0 24px rgba(242, 201, 76, 0.6);
+}
+
+.assento-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.nome {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.limite {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.pontos {
+  min-width: 48px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #10261d;
+  background: var(--ouro);
+}
+
+.pontos.estourou {
+  color: #fff;
+  background: var(--vermelho);
+}
+
+.mao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+  align-content: flex-start;
+}
+
+.status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* ---------- cartas ---------- */
+
+.carta {
+  position: relative;
+  width: 64px;
+  height: 90px;
+  border-radius: 8px;
+  background: var(--papel);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  user-select: none;
+}
+
+.carta.vermelha {
+  color: var(--vermelho);
+}
+
+.carta.preta {
+  color: var(--preto);
+}
+
+.carta .canto {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  font-size: 0.9rem;
+}
+
+.carta .centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+
+.slot .carta {
+  width: 84px;
+  height: 118px;
+}
+
+.slot .carta .canto {
+  font-size: 1rem;
+}
+
+.slot .carta .centro {
+  font-size: 2rem;
+}
+
+.carta.verso {
+  background:
+    repeating-linear-gradient(45deg, #1d3c8f 0 6px, #274ab3 6px 12px);
+  border: 4px solid var(--papel);
+}
+
+.carta.nova {
+  animation: distribuir 0.55s ease-out;
+}
+
+@keyframes distribuir {
+  from {
+    opacity: 0;
+    transform: translate(-90px, -70px) rotate(-18deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- lances ---------- */
+
+.painel {
+  grid-area: painel;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 640px;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--painel);
+}
+
+.painel h2 {
+  margin: 0 0 10px;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--ouro);
+}
+
+.log {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.log li {
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.log li.atual {
+  background: rgba(242, 201, 76, 0.2);
+  font-weight: 600;
+}
+
+/* ---------- controles ---------- */
+
+.controles {
+  grid-area: controles;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.barra {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.progresso {
+  height: 100%;
+  width: 0;
+  background: var(--ouro);
+  transition: width 0.3s;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+button {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2b1d14;
+  background: var(--ouro);
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .mesa {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "feltro"
+      "painel"
+      "controles";
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carta.nova {
+    animation: none;
+  }
+}
+
+/* ---------- semente ---------- */
+
+.semente {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.semente label {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.semente input {
+  width: 140px;
+  padding: 8px 12px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  font-size: 1rem;
+  color: var(--texto);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.semente button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}

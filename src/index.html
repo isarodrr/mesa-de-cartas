@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>Mesa de Cartas</title>
+    <link rel="stylesheet" href="./ui/estilo.css" />
+  </head>
+  <body>
+    <header class="topo">
+      <h1>Mesa de Cartas</h1>
+      <p>Vinte-e-um simplificado <span id="semente"></span></p>
+      <form class="semente" onsubmit="return false">
+        <label for="campo-semente">Semente</label>
+        <input id="campo-semente" type="number" min="1" step="1" />
+        <button id="btn-semente" type="button">Jogar</button>
+        <button id="btn-aleatoria" type="button">🎲 Aleatória</button>
+        <button id="btn-padrao" type="button">Padrão (42)</button>
+      </form>
+    </header>
+
+    <p id="aviso" class="aviso" hidden></p>
+
+    <main id="mesa" class="mesa" hidden>
+      <section class="feltro">
+        <div class="pilhas">
+          <div class="pilha">
+            <span class="rotulo">Monte de compra</span>
+            <div id="monte" class="slot"></div>
+            <span id="monte-qtd" class="qtd"></span>
+          </div>
+          <div class="pilha">
+            <span class="rotulo">Descarte</span>
+            <div id="descarte" class="slot"></div>
+            <span id="descarte-qtd" class="qtd"></span>
+          </div>
+          <p id="resultado" class="resultado" hidden></p>
+        </div>
+
+        <div id="assentos" class="assentos"></div>
+      </section>
+
+      <aside class="painel">
+        <h2>Lances</h2>
+        <ol id="log" class="log"></ol>
+      </aside>
+
+      <footer class="controles">
+        <div class="barra"><div id="progresso" class="progresso"></div></div>
+        <div class="botoes">
+          <button id="btn-reiniciar" type="button">↺ Reiniciar</button>
+          <button id="btn-reproduzir" type="button">▶ Reproduzir</button>
+          <button id="btn-proximo" type="button">Próximo lance ›</button>
+          <button id="btn-fim" type="button">Ir ao fim ⏭</button>
+        </div>
+      </footer>
+    </main>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
